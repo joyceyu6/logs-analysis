@@ -1,6 +1,41 @@
 # logs-analysis
 
-This is the submission for Udacity project
+This is a project to uses psycopg2 to query a mock PostgreSQL database for a fictional news website.
+
+There are three database inside the database `news`, which are `authors`, `artilces` and `log`.
+
+Table `author` has following columns:
+
+- id interger
+- name text
+- bio text
+
+Table `articles` has following columns:
+
+- author integer
+- title text
+- slug text
+- lead text
+- body text
+- time timestamp
+- id integer
+
+Table `log` has following columns:
+
+- path text
+- ip inet
+- method text
+- status text
+- time timestamp
+- id integer
+
+With the data from all these three tables, I will try to answer following questions:
+
+1. What are the most popular three articles of all time? Which articles have been accessed the most?
+2. Who are the most popular article authors of all time?
+3. On which days did more than 1% of requests lead to errors?
+
+Please follow my steps to see how I get the result of these questions.
 
 ## Prerequisite
 
@@ -48,6 +83,14 @@ psql - d news -f newsdata.sql
 ```
 
 Running this command will connect to your installed database server and execute the SQL commands in the newsdata.sql file, creating tables and populating them with data.
+
+## Create view for question 3
+
+To simplify the solution for question 3, I used `CREATE VIEW` statements in an sql file . Before you run the pythone code, you need to run below code to import the views to the `news` database. You would only need to do this once, when you initially set up the database:
+
+```shell
+psql -d news -f create_views.sql
+```
 
 ## Run the python code
 

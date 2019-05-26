@@ -1,6 +1,9 @@
 # vagrant hiden file
 .vagrant
 
+# Visual studio code edit setting directory
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

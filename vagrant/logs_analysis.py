@@ -65,7 +65,7 @@ def get_mp_authors(dbname="news"):
     c = db.cursor()
     c.execute("""
       select
-        name, views
+        name, sum(views) as total_views
       from authors
         left join articles on authors.id = articles.author
         inner join (
@@ -73,7 +73,8 @@ def get_mp_authors(dbname="news"):
           from log
           group by log.path
         ) as log on ('/article/' || articles.slug) = log.path
-      order by views desc;
+      group by authors.name
+      order by total_views desc;
     """)
     mp_authors = c.fetchall()
     db.close()
